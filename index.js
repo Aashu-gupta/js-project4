@@ -6,6 +6,8 @@ sessionStorage.clear();
 const scoreEl= document.getElementById("score");
 const questionEl = document.getElementById("questionEl");
 const formEl = document.getElementById("formEl");
+const btn= document.getElementById("btn")
+var snackbar = document.getElementById("snackbar");
 let score= sessionStorage.getItem("score")
 let actualAnswer;
 
@@ -70,9 +72,19 @@ const checkAnswer = (event) =>{
     const userAnswer = +formData.get("answerInput");
     console.log(userAnswer);
     if (userAnswer === actualAnswer) 
-    {score += 1;}
+    {score += 1;
+      snackbar.innerText="you got right score +1";
+      snackbar.className = "show";
+      snackbar.style.backgroundColor = "green";
+      setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 1000);
+    }
      else
-    { score -= 1;}
+    { score -= 1;
+      snackbar.innerText="you are wrong score -1";
+      snackbar.className = "show";
+      snackbar.style.backgroundColor = "red";
+      setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 1000);
+    }
     showQues();
     sessionStorage.setItem("score",score);
     event.target.reset();
